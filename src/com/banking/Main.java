@@ -41,6 +41,17 @@ public class Main {
                         depositAcc.deposit(amount);
                     }
                     break;
+                case 3:
+                    System.out.print("Enter Account Number: ");
+                    accNum = scanner.next();
+                    Account withdrawAcc = bank.findAccount(accNum);
+                    if (withdrawAcc != null) {
+                        System.out.print("Enter Withdraw Amount: ");
+                        double amount = scanner.nextDouble();
+                        // Polymorphism: This runs different code for Savings vs Checking!
+                        withdrawAcc.withdraw(amount);
+                    }
+                    break;
             }
             if (choice == 5) {
                 System.out.println("Exiting System...");
