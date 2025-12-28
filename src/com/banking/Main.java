@@ -16,7 +16,8 @@ public class Main {
             System.out.println("2. Deposit");
             System.out.println("3. Withdraw");
             System.out.println("4. Transfer");
-            System.out.println("5. Exit");
+            System.out.println("5. Create Account");
+            System.out.println("6. Exit");
             System.out.print("Enter choice: ");
 
             int choice = scanner.nextInt();
@@ -70,8 +71,27 @@ public class Main {
                         System.out.println("Error: One or both accounts not found.");
                     }
                     break;
+                case 5:
+                    System.out.println("Select Account Type: (1) Savings (2) Checking");
+                    int type = scanner.nextInt();
+                    
+                    System.out.print("Enter New Account Number: ");
+                    String newNum = scanner.next();
+                    System.out.print("Enter Initial Balance: ");
+                    double newBal = scanner.nextDouble();
+                    
+                    if (type == 1) {
+                        System.out.print("Enter Interest Rate (e.g., 0.03): ");
+                        double rate = scanner.nextDouble();
+                        bank.addAccount(new SavingsAccount(newNum, newBal, rate));
+                    } else if (type == 2) {
+                        System.out.print("Enter Overdraft Limit: ");
+                        double limit = scanner.nextDouble();
+                        bank.addAccount(new CheckingAccount(newNum, newBal, limit));
+                    }
+                    break;
             }
-            if (choice == 5) {
+            if (choice == 6) {
                 System.out.println("Exiting System...");
                 break;
             }
