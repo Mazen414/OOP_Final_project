@@ -10,6 +10,10 @@ public class Main {
         SavingsAccount user1 = new SavingsAccount("User1", 1000.0, 0.02);
         bank.addAccount(user1);
 
+        System.out.println("\n-----------------------------------------");
+        System.out.println("            BANKING SYSTEM               ");
+        System.out.println("-----------------------------------------");
+        
         while (true) {
             System.out.println("\n--- BANKING SYSTEM MENU ---");
             System.out.println("1. View Balance");
@@ -100,6 +104,7 @@ public class Main {
                     }
                     break;
             }
+            System.out.println("-----------------------------------------");
             if (choice == 7) {
                 System.out.println("Exiting System...");
                 break;
