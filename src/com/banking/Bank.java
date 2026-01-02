@@ -24,4 +24,18 @@ public class Bank {
         System.out.println("Error: Account " + accountNumber + " not found.");
         return null;
     }
+    
+    public boolean deleteAccount(String accountNumber) {
+        // 1. Reuse your existing search method
+        Account accountToDelete = findAccount(accountNumber);
+
+        // 2. If found, remove it from the list
+        if (accountToDelete != null) {
+            accounts.remove(accountToDelete);
+            return true; // Deletion successful
+        }
+        
+        // Account wasn't found (findAccount already printed the error message)
+        return false; 
+    }
 }

@@ -23,7 +23,8 @@ public class Main {
             System.out.println("5. Create Account");
             System.out.println("6. View History");
             System.out.println("7.Calculate Interest (Savings Only)");
-            System.out.println("8. Exit");
+            System.out.println("8. Delete Account");
+            System.out.println("9. Exit");
             System.out.print("Enter choice: ");
 
             int choice = scanner.nextInt();
@@ -128,9 +129,22 @@ public class Main {
                         System.out.println("Error: Account not found.");
                     }
                     break;
+                case 8:
+                    System.out.print("Enter Account ID to delete: ");
+                    String delId = scanner.next();
+                    
+                    // Call the new method
+                    boolean isDeleted = bank.deleteAccount(delId);
+                    
+                    if (isDeleted) {
+                        System.out.println("Account " + delId + " was successfully deleted.");
+                    }
+                    // We don't need an 'else' here because findAccount inside Bank.java
+                    // already prints "Error: Account ... not found."
+                    break;
             }
             System.out.println("-----------------------------------------");
-            if (choice == 8) {
+            if (choice == 9) {
                 System.out.println("Exiting System...");
                 break;
             }
