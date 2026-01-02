@@ -20,7 +20,7 @@ public class SavingsAccount extends Account {
     }
 
     public void applyInterest() {
-        double interest = balance * interestRate;
+        double interest = balance * interestRate/100;
         deposit(interest); 
         System.out.println("Interest applied: $" + interest);
     }

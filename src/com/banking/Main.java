@@ -22,7 +22,8 @@ public class Main {
             System.out.println("4. Transfer");
             System.out.println("5. Create Account");
             System.out.println("6. View History");
-            System.out.println("7. Exit");
+            System.out.println("7.Calculate Interest (Savings Only)");
+            System.out.println("8. Exit");
             System.out.print("Enter choice: ");
 
             int choice = scanner.nextInt();
@@ -103,9 +104,33 @@ public class Main {
                         historyAcc.printStatement();
                     }
                     break;
+                case 7:
+                    System.out.print("Enter Savings Account ID to apply interest: ");
+                    String intAccId = scanner.next();
+                    
+                    // 1. Find the account object
+                    Account interestAccount = bank.findAccount(intAccId);
+
+                    if (interestAccount != null) {
+                        // 2. Check: Is this actually a SavingsAccount?
+                        if (interestAccount instanceof SavingsAccount) {
+                            
+                            // 3. Cast: Convert generic 'Account' to 'SavingsAccount'
+                            SavingsAccount savingsAcc = (SavingsAccount) interestAccount;
+                            
+                            // 4. Call the method that only exists in SavingsAccount
+                            savingsAcc.applyInterest(); 
+                                                        
+                        } else {
+                            System.out.println("Error: Account " + intAccId + " is not a Savings Account.");
+                        }
+                    } else {
+                        System.out.println("Error: Account not found.");
+                    }
+                    break;
             }
             System.out.println("-----------------------------------------");
-            if (choice == 7) {
+            if (choice == 8) {
                 System.out.println("Exiting System...");
                 break;
             }
