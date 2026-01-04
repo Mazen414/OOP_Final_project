@@ -2,6 +2,8 @@ package com.banking;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public abstract class Account implements Transferable {
     
@@ -53,4 +55,23 @@ public abstract class Account implements Transferable {
 
     public String getAccountNumber() { return accountNumber; }
     public double getBalance() { return balance; }
+    
+    public void exportToTextFile() {
+        String fileName = "Statement_" + accountNumber + ".txt";
+        
+        // try-with-resources automatically closes the file when done
+        try (FileWriter writer = new FileWriter(fileName)) {
+            writer.write("--- Bank Statement for Account: " + accountNumber + " ---\n");
+            writer.write("Current Balance: $" + balance + "\n");
+            writer.write("--------------------------------------------------\n");
+            
+            for (Transaction t : transactionHistory) {
+                writer.write(t.toString() + "\n");
+            }
+            
+            System.out.println("Success! Statement exported to project folder: " + fileName);
+        } catch (IOException e) {
+            System.out.println("Error writing to file: " + e.getMessage());
+        }
+    }
 }

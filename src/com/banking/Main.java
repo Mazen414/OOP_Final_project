@@ -27,7 +27,8 @@ public class Main {
             System.out.println("8. Delete Account");
             System.out.println("9. View Total Bank Assets");
             System.out.println("10. Simulate Month End (Interest)");
-            System.out.println("11. Exit");
+            System.out.println("11. Export Statement to File");
+            System.out.println("12. Exit");
             System.out.print("Enter choice: ");
 
             try {
@@ -158,12 +159,22 @@ public class Main {
                         break;
                         
                     case 11:
+                        System.out.print("Enter Account ID to export: ");
+                        accNum = scanner.next();
+                        Account exportAcc = bank.findAccount(accNum);
+                        
+                        if (exportAcc != null) {
+                            exportAcc.exportToTextFile();
+                        }
+                        break;
+                        
+                    case 12:
                         System.out.println("Exiting System...");
                         System.exit(0);
                         break;
                         
                     default:
-                        System.out.println("Invalid option. Please enter a number between 1-11.");
+                        System.out.println("Invalid option. Please enter a number between 1-12.");
                 }
             } catch (InputMismatchException e) {
                 // ---  CATCH BLOCK ---
