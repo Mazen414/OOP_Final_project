@@ -11,10 +11,18 @@ public class Main {
         SavingsAccount user1 = new SavingsAccount("User1", 1000.0, 0.02);
         bank.addAccount(user1);
 
-        System.out.println("\n-----------------------------------------");
-        System.out.println("            BANKING SYSTEM               ");
-        System.out.println("-----------------------------------------");
-
+        System.out.println("==========================================");
+        System.out.println("   ____              _    _             ");
+        System.out.println("  |  _ \\            | |  (_)            ");
+        System.out.println("  | |_) | __ _ _ __ | | ___ _ __   __ _ ");
+        System.out.println("  |  _ < / _` | '_ \\| |/ / | '_ \\ / _` |");
+        System.out.println("  | |_) | (_| | | | |   <| | | | | (_| |");
+        System.out.println("  |____/ \\__,_|_| |_|_|\\_\\_|_| |_|\\__, |");
+        System.out.println("                                   __/ |");
+        System.out.println("   S  Y  S  T  E  M               |___/ ");
+        System.out.println("==========================================");
+        System.out.println("        Welcome, " + System.getProperty("user.name") + "!");
+        System.out.println("==========================================");
         while (true) {
             System.out.println("\n--- BANKING SYSTEM MENU ---");
             System.out.println("1. View Balance");
