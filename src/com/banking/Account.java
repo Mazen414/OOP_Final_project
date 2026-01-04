@@ -1,16 +1,25 @@
 package com.banking;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Abstract class representing a generic bank account.
+ * Implements the Transferable interface to allow fund transfers.
+ */
 public abstract class Account implements Transferable {
     
     private String accountNumber;
     protected double balance;
     private List<Transaction> transactionHistory;
 
+    /**
+     * Constructor to initialize an account.
+     * @param accountNumber Unique ID for the account.
+     * @param balance Initial deposit amount.
+     */
     public Account(String accountNumber, double balance) {
         this.accountNumber = accountNumber;
         this.balance = balance;
@@ -18,6 +27,10 @@ public abstract class Account implements Transferable {
         addTransaction("Initial Creation", balance);
     }
 
+    /**
+     * Deposits a positive amount into the account.
+     * @param amount The amount to add to the balance.
+     */
     public void deposit(double amount) {
         if (amount > 0) {
             balance += amount;
@@ -28,8 +41,19 @@ public abstract class Account implements Transferable {
         }
     }
 
+    /**
+     * Abstract method to withdraw funds. 
+     * Specific logic (overdraft vs insufficient funds) is handled by subclasses.
+     * @param amount The amount to deduct.
+     */
     public abstract void withdraw(double amount);
 
+    /**
+     * Transfers funds from this account to another.
+     * @param toAccount The destination account object.
+     * @param amount The amount to transfer.
+     * @return true if successful, false otherwise.
+     */
     @Override
     public boolean transfer(Account toAccount, double amount) {
         if (this.balance >= amount) {
@@ -42,10 +66,18 @@ public abstract class Account implements Transferable {
         return false;
     }
     
+    /**
+     * Records a transaction internally.
+     * @param type The type of transaction (Deposit, Withdraw, etc.).
+     * @param amount The amount involved.
+     */
     protected void addTransaction(String type, double amount) {
         transactionHistory.add(new Transaction(type, amount, "Balance: " + balance));
     }
 
+    /**
+     * Prints the transaction history to the console.
+     */
     public void printStatement() {
         System.out.println("\n--- Statement for " + accountNumber + " ---");
         for (Transaction t : transactionHistory) {
@@ -53,13 +85,13 @@ public abstract class Account implements Transferable {
         }
     }
 
-    public String getAccountNumber() { return accountNumber; }
-    public double getBalance() { return balance; }
-    
+    /**
+     * Exports the transaction history to a text file.
+     * The file is saved in the project root directory.
+     */
     public void exportToTextFile() {
         String fileName = "Statement_" + accountNumber + ".txt";
         
-        // try-with-resources automatically closes the file when done
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write("--- Bank Statement for Account: " + accountNumber + " ---\n");
             writer.write("Current Balance: $" + balance + "\n");
@@ -74,4 +106,7 @@ public abstract class Account implements Transferable {
             System.out.println("Error writing to file: " + e.getMessage());
         }
     }
+
+    public String getAccountNumber() { return accountNumber; }
+    public double getBalance() { return balance; }
 }

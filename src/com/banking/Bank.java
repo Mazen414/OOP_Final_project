@@ -3,6 +3,10 @@ package com.banking;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Manages the collection of accounts in the banking system.
+ * Handles adding, finding, deleting, and reporting on accounts.
+ */
 public class Bank {
     private List<Account> accounts;
 
@@ -10,11 +14,20 @@ public class Bank {
         this.accounts = new ArrayList<>();
     }
 
+    /**
+     * Adds a new account to the bank's database.
+     * @param account The Account object (Savings or Checking) to add.
+     */
     public void addAccount(Account account) {
         accounts.add(account);
         System.out.println("Account created successfully: " + account.getAccountNumber());
     }
 
+    /**
+     * Searches for an account by its ID.
+     * @param accountNumber The String ID to search for.
+     * @return The Account object if found, or null if not found.
+     */
     public Account findAccount(String accountNumber) {
         for (Account acc : accounts) {
             if (acc.getAccountNumber().equals(accountNumber)) {
@@ -24,26 +37,30 @@ public class Bank {
         System.out.println("Error: Account " + accountNumber + " not found.");
         return null;
     }
-    
-    public boolean deleteAccount(String accountNumber) {
-        // 1. Reuse your existing search method
-        Account accountToDelete = findAccount(accountNumber);
 
-        // 2. If found, remove it from the list
+    /**
+     * Deletes an account from the system.
+     * @param accountNumber The ID of the account to remove.
+     * @return true if deleted, false if not found.
+     */
+    public boolean deleteAccount(String accountNumber) {
+        Account accountToDelete = findAccount(accountNumber);
+        
         if (accountToDelete != null) {
             accounts.remove(accountToDelete);
-            return true; // Deletion successful
+            return true; 
         }
-        
-        // Account wasn't found (findAccount already printed the error message)
         return false; 
     }
-    
+
+    /**
+     * Calculates and prints the total assets held by the bank.
+     */
     public void printTotalAssets() {
         double totalAssets = 0;
         
         for (Account acc : accounts) {
-            totalAssets += acc.getBalance(); // Adds each account's balance to total
+            totalAssets += acc.getBalance(); 
         }
         
         System.out.println("---------------------------");
@@ -51,6 +68,11 @@ public class Bank {
         System.out.println("Total Accounts: " + accounts.size());
         System.out.println("---------------------------");
     }
+
+    /**
+     * Simulates the end of the month processing.
+     * Applies interest to all SavingsAccounts.
+     */
     public void simulateMonthEnd() {
         System.out.println("\n--- RUNNING MONTH-END SIMULATION ---");
         int savingsAccountsProcessed = 0;
@@ -58,7 +80,7 @@ public class Bank {
         for (Account acc : accounts) {
             if (acc instanceof SavingsAccount) {
                 SavingsAccount sAcc = (SavingsAccount) acc;
-                sAcc.applyInterest(); // This adds money and prints a message
+                sAcc.applyInterest(); 
                 savingsAccountsProcessed++;
             }
         }
