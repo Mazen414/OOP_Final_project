@@ -51,4 +51,21 @@ public class Bank {
         System.out.println("Total Accounts: " + accounts.size());
         System.out.println("---------------------------");
     }
+    public void simulateMonthEnd() {
+        System.out.println("\n--- RUNNING MONTH-END SIMULATION ---");
+        int savingsAccountsProcessed = 0;
+        
+        for (Account acc : accounts) {
+            if (acc instanceof SavingsAccount) {
+                SavingsAccount sAcc = (SavingsAccount) acc;
+                sAcc.applyInterest(); // This adds money and prints a message
+                savingsAccountsProcessed++;
+            }
+        }
+        
+        System.out.println("--------------------------------------");
+        System.out.println("Month-End Complete.");
+        System.out.println("Interest applied to " + savingsAccountsProcessed + " accounts.");
+        System.out.println("--------------------------------------");
+    }
 }

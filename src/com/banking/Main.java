@@ -26,7 +26,8 @@ public class Main {
             System.out.println("7. Calculate Interest (Savings Only)");
             System.out.println("8. Delete Account");
             System.out.println("9. View Total Bank Assets");
-            System.out.println("10. Exit");
+            System.out.println("10. Simulate Month End (Interest)");
+            System.out.println("11. Exit");
             System.out.print("Enter choice: ");
 
             try {
@@ -153,15 +154,19 @@ public class Main {
                         break;
 
                     case 10:
+                        bank.simulateMonthEnd();
+                        break;
+                        
+                    case 11:
                         System.out.println("Exiting System...");
                         System.exit(0);
                         break;
                         
                     default:
-                        System.out.println("Invalid option. Please enter a number between 1-10.");
+                        System.out.println("Invalid option. Please enter a number between 1-11.");
                 }
             } catch (InputMismatchException e) {
-                // --- PUSH 15: CATCH BLOCK ---
+                // ---  CATCH BLOCK ---
                 System.out.println("Error: Invalid input. Please enter a numeric value.");
                 scanner.nextLine(); // Clear the buffer to prevent infinite loop
             }
